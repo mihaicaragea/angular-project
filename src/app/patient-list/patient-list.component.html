@@ -1,0 +1,52 @@
+<router-outlet></router-outlet>
+<div class="d-flex container">
+  <div class="btn btn-dark btn-sm mt-2 ml-auto p-2">
+    <a routerLink="">Go back</a>
+  </div>
+  <div class="btn btn-warning btn-sm mt-2 ml-2 p-2">
+    <a routerLink="add-patient">Add new patient</a>
+  </div>
+</div>
+
+<div class="container-md mt-1">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr class="justify-content-center">
+        <th scope="col ">Number</th>
+        <th scope="col ">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Date of Birth</th>
+        <th scope="col">Sex</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let patient of patients; index as ind">
+      <tr>
+        <td>
+          <span class="badge badge-success">{{ patient.ordNumber }}</span>
+        </td>
+        <td>{{ patient.firstName }}</td>
+        <td>{{ patient.lastName }}</td>
+        <td>{{ patient.birthDay | date: "dd-MM-yyyy" }}</td>
+        <td>{{ patient.sex }}</td>
+        <td class="d-flex justify-content-center">
+          <button
+            type="button"
+            routerLink="{{ ind }}"
+            class="btn btn-secondary btn-sm mr-1"
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            (click)="delete(ind)"
+            routerLink=""
+            class="btn btn-danger btn-sm"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,210 @@
+<div class="container d-flex flex-column align-items-center">
+  <h1 class="mt-3 mb-3" *ngIf="!index">Add new Patient</h1>
+  <h1 class="mt-3 mb-3" *ngIf="index">
+    Edit the Patient<span class="badge ml-1 badge-success">{{
+      patient.ordNumber
+    }}</span>
+  </h1>
+
+  <form
+    #form="ngForm"
+    (ngSubmit)="onFormSubmit(form)"
+    *ngIf="!index"
+    else
+    AddPatient
+  >
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="firstName">First Name</label>
+        <input
+          ngModel
+          #firstName="ngModel"
+          required
+          minlength="2"
+          name="firstName"
+          type="text"
+          class="form-control"
+          id="firstName"
+          required
+        />
+        <div
+          *ngIf="firstName.invalid && firstName.touched && firstName.errors"
+          class="alert alert-danger"
+          role="alert"
+        >
+          Enter the first name
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          ngModel
+          #lastName="ngModel"
+          required
+          name="lastName"
+          class="form-control"
+          id="lastName"
+        />
+        <div
+          *ngIf="lastName.invalid && lastName.touched"
+          class="alert alert-danger"
+          role="alert"
+        >
+          Enter the last name
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="birthDate">Date of Birth</label>
+      <input
+        type="date"
+        ngModel
+        name="birthDate"
+        class="form-control"
+        id="birthDate"
+      />
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <select ngModel name="gender" id="gender" class="form-control">
+        <option selected>Male</option>
+        <option>Female</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="cnp">CNP</label>
+      <input
+        type="text"
+        ngModel
+        #cnpField="ngModel"
+        minlength="13"
+        name="cnp"
+        class="form-control"
+        id="cnp"
+      />
+    </div>
+    <div
+      *ngIf="cnpField.invalid && cnpField.touched"
+      class="alert alert-danger"
+      role="alert"
+    >
+      CNP must be min length 13 characters
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone number</label>
+      <input
+        type="text"
+        ngModel
+        name="phoneNumber"
+        class="form-control"
+        id="phoneNumber"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+  <form *ngIf="index" #form="ngForm" (ngSubmit)="onEditSubmit(form)">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="firstName">First Name</label>
+        <input
+          ngModel
+          #firstName="ngModel"
+          required
+          minlength="4"
+          name="firstName"
+          type="text"
+          class="form-control"
+          id="firstName"
+          placeholder="{{ patient.firstName }}"
+        />
+        <div
+          *ngIf="firstName.invalid && firstName.touched"
+          class="alert alert-danger"
+          role="alert"
+        >
+          Enter the first name
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          ngModel
+          #lastName="ngModel"
+          required
+          name="lastName"
+          class="form-control"
+          id="lastName"
+          placeholder="{{ patient.lastName }}"
+        />
+        <div
+          *ngIf="lastName.invalid && lastName.touched"
+          class="alert alert-danger"
+          role="alert"
+        >
+          Enter the last name
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="birthDate">Date of Birth</label>
+      <input
+        type="date"
+        ngModel
+        required
+        name="birthDate"
+        class="form-control"
+        id="birthDate"
+      />
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <select
+        ngModel
+        required
+        name="gender"
+        id="gender"
+        class="form-control"
+        value="{{ patient.sex }}"
+      >
+        <option selected>Male</option>
+        <option>Female</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="cnp">CNP</label>
+      <input
+        type="text"
+        ngModel
+        required
+        #cnpField="ngModel"
+        minlength="13"
+        name="cnp"
+        class="form-control"
+        id="cnp"
+        placeholder="{{ patient.CNP }}"
+      />
+    </div>
+    <div
+      *ngIf="cnpField.invalid && cnpField.touched"
+      class="alert alert-danger"
+      role="alert"
+    >
+      CNP must be min length 13 characters
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone number</label>
+      <input
+        type="text"
+        ngModel
+        name="phoneNumber"
+        class="form-control"
+        id="phoneNumber"
+        placeholder="{{ patient.phoneNumber }}"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+</div>
